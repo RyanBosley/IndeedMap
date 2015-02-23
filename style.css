@@ -1,0 +1,19 @@
+html,body,#container {
+    height: 100%;
+    width:100%;
+    overflow: hidden;
+}
+body {
+    padding-top: 50px;
+}       
+#map {
+    width: auto;
+    height: 100%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+#indeed_at {
+    position: absolute;
+    z-index: 101;
+    right: 10px;
+    bottom: 25px;
+} 
