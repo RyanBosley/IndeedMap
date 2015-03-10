@@ -1,16 +1,19 @@
-var map = L.map('map',{center:new L.latLng(38.41055825094609,-93.33984375),zoom:4,home:true}).setView([38.37611542403604, -93.3837890625], 4);
-L.tileLayer('http://api.tiles.mapbox.com/v4/examples.map-zr0njcqy/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoicnlhbm1ib3NsZXkiLCJhIjoiMkJqazZLbyJ9.nPS-SAuaRamw9TdSxsm3BA', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18
-}).addTo(map);
-map.options.center=map.getCenter();
-
-var markers = new L.MarkerClusterGroup();
-map.addLayer(markers);
-
 var paging=document.getElementById('paging');
 var resultsSection=document.getElementById('results-section');
+var theForm=$('#theForm');
 var data;
+
+function initMap(){
+    var map = L.map('map',{center:new L.latLng(38.41055825094609,-93.33984375),zoom:4,home:true}).setView([38.37611542403604, -93.3837890625], 4);
+    L.tileLayer('http://api.tiles.mapbox.com/v4/examples.map-zr0njcqy/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoicnlhbm1ib3NsZXkiLCJhIjoiMkJqazZLbyJ9.nPS-SAuaRamw9TdSxsm3BA', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18
+    }).addTo(map);
+    map.options.center=map.getCenter();
+    
+    var markers = new L.MarkerClusterGroup();
+    map.addLayer(markers);
+}
 
 var CustomMarker = L.Marker.extend({ 
     bindPopup: function(htmlContent, options) {                                    
@@ -157,9 +160,11 @@ function onReset(e){
     resultsSection.style.display='none';
 }
 
-var theForm= $('#theForm');
+initMap();
+
 theForm.on('submit',onSubmit);
 theForm.on('reset',onReset);
+
 $('#btnPrevious').on('click',function(){
     if (data.pageNumber > 0) {
         var start=data.pageNumber===1 ? '' : (data.pageNumber - 1) * 10;
@@ -169,6 +174,7 @@ $('#btnPrevious').on('click',function(){
         });
     }
 });
+
 $('#btnNext').on('click',function(){
     if (data.end < data.totalResults) {
         doSearch(data.query,data.location,data.end).done(function(response){
