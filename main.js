@@ -5,7 +5,7 @@ L.tileLayer('http://api.tiles.mapbox.com/v4/examples.map-zr0njcqy/{z}/{x}/{y}.pn
 }).addTo(map);
 map.options.center=map.getCenter();
 
-var markers = new L.FeatureGroup();
+var markers = new L.MarkerClusterGroup();
 map.addLayer(markers);
 
 var paging=document.getElementById('paging');
