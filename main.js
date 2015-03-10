@@ -10,6 +10,7 @@ map.addLayer(markers);
 
 var paging=document.getElementById('paging');
 var resultsSection=document.getElementById('results-section');
+var mapmargin = 50;
 var data;
 
 var CustomMarker = L.Marker.extend({ 
@@ -77,6 +78,17 @@ var CustomMarker = L.Marker.extend({
         return false;                
     }     
 });
+
+function resize(){
+    if($(window).width()>=980){
+        $('#map').css("height", ($(window).height() - mapmargin));    
+        $('#map').css("margin-top",50);
+    }
+    else{
+        $('#map').css("height", ($(window).height() - (mapmargin+12)));    
+        $('#map').css("margin-top",-21);
+    }
+}
 
 function doSearch(what,where,start) {
     var dfd=new $.Deferred(); 
@@ -156,6 +168,10 @@ function onReset(e){
     clearResults();
     resultsSection.style.display='none';
 }
+
+$('#map').css("height", ($(window).height() - mapmargin));
+$(window).on("resize", resize);
+resize();
 
 var theForm= $('#theForm');
 theForm.on('submit',onSubmit);
