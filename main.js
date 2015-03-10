@@ -1,17 +1,17 @@
 var paging=document.getElementById('paging');
 var resultsSection=document.getElementById('results-section');
 var theForm=$('#theForm');
-var data;
+var data,map,markers;
 
 function initMap(){
-    var map = L.map('map',{center:new L.latLng(38.41055825094609,-93.33984375),zoom:4,home:true}).setView([38.37611542403604, -93.3837890625], 4);
+    map = L.map('map',{center:new L.latLng(38.41055825094609,-93.33984375),zoom:4,home:true}).setView([38.37611542403604, -93.3837890625], 4);
     L.tileLayer('http://api.tiles.mapbox.com/v4/examples.map-zr0njcqy/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoicnlhbm1ib3NsZXkiLCJhIjoiMkJqazZLbyJ9.nPS-SAuaRamw9TdSxsm3BA', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18
     }).addTo(map);
     map.options.center=map.getCenter();
     
-    var markers = new L.MarkerClusterGroup();
+    markers = new L.MarkerClusterGroup();
     map.addLayer(markers);
 }
 
