@@ -86,6 +86,8 @@
         markers.clearLayers();
         paging.innerHTML='';
         resultsSection.style.display='block';
+        btnNext.style.display='none';
+        btnPrevious.style.display='none';
     }
     
     function onReset(e){
