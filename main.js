@@ -65,7 +65,7 @@
         if (data.results.length) {
             var bounds=markers.getBounds();
             if(bounds.isValid()){
-                map.fitBounds();
+                map.fitBounds(bounds);
             }
         
             resultsSection.style.display='block';
