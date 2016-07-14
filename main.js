@@ -16,7 +16,7 @@
     function initMap(){
         map = L.map('map',{center:new L.latLng(38.41055825094609,-93.33984375),zoom:4,home:true}).setView([38.37611542403604, -93.3837890625], 4);
         L.tileLayer('http://api.tiles.mapbox.com/v4/examples.map-zr0njcqy/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoicnlhbm1ib3NsZXkiLCJhIjoiMkJqazZLbyJ9.nPS-SAuaRamw9TdSxsm3BA', {
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery Â© <a href="http://mapbox.com">Mapbox</a>',
             maxZoom: 18
         }).addTo(map);
         map.options.center=map.getCenter();
@@ -63,7 +63,10 @@
         });
         
         if (data.results.length) {
-            map.fitBounds(markers.getBounds());
+            var bounds=markers.getBounds();
+            if(bounds.isValid()){
+                map.fitBounds();
+            }
         
             resultsSection.style.display='block';
             paging.innerHTML='Jobs ' + data.start + ' to ' + data.end + ' of ' + data.totalResults;
