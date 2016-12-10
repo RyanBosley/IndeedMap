@@ -76,6 +76,9 @@
     }
     
     function getParent(element, className) {		
+        if(!element){
+            return false;
+        }
         var parent = element.parentNode;        
         while (parent != null) {                
             if (parent.className && L.DomUtil.hasClass(parent, className))
