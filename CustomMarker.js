@@ -53,7 +53,10 @@ var CustomMarker=(function(L){
             this.closePopup();                
         },
             
-        _getParent: function(element, className) {                
+        _getParent: function(element, className) {   
+            if(!element){
+                return false;
+            }
             var parent = element.parentNode;            
             while (parent != null) {                    
                 if (parent.className && L.DomUtil.hasClass(parent, className)){
