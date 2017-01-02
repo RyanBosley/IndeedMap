@@ -54,7 +54,7 @@
         
         data.results.forEach(function(result){  
             if (result.latitude && result.longitude) {
-                var marker = new CustomMarker([result.latitude,result.longitude]);
+                var marker = new L.marker([result.latitude,result.longitude]);
                 var content='<a href="' + result.url + '" target="_blank">' + result.jobtitle +
                     '</a><br/><span>' + result.company + '</span><br/><span>' + result.formattedLocationFull + '<span>';
                 marker.bindPopup(content,{showOnMouseOver: true});
@@ -73,19 +73,6 @@
             btnNext.style.display=data.end < data.totalResults ? 'inline-block' : 'none';
             btnPrevious.style.display=data.pageNumber > 0 ? 'inline-block' : 'none';
         }        
-    }
-    
-    function getParent(element, className) {		
-        if(!element){
-            return false;
-        }
-        var parent = element.parentNode;        
-        while (parent != null) {                
-            if (parent.className && L.DomUtil.hasClass(parent, className))
-                return parent;            
-            parent = parent.parentNode;                
-        }        
-        return false;            
     }
     
     function clearResults() {
