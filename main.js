@@ -75,7 +75,9 @@
             paging.innerHTML='Jobs ' + data.start + ' to ' + data.end + ' of ' + data.totalResults;
             btnNext.style.display=data.end < data.totalResults ? 'inline-block' : 'none';
             btnPrevious.style.display=data.pageNumber > 0 ? 'inline-block' : 'none';
-        }        
+        } else {
+            paging.innerHTML='No results';
+        }
     }
     
     function clearResults() {
@@ -102,7 +104,7 @@
             var options={
                 what: data.query,
                 where: data.location,
-                co: data.country,
+                country: data.country,
                 start: start
             };
             doSearch(options,function(response){
@@ -118,7 +120,7 @@
             var options={
                 what: data.query,
                 where: data.location,
-                co: data.country,
+                country: data.country,
                 start: data.end
             };
             doSearch(options,function(response){
