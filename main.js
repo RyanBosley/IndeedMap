@@ -14,12 +14,12 @@
     btnNext.addEventListener('click',nextResults);
     
     function initMap(){
-        map = L.map('map',{center:new L.latLng(38.41055825094609,-93.33984375),zoom:4,home:true}).setView([38.37611542403604, -93.3837890625], 4);
+        map = L.map('map').setView([0, 0], 2);
+
         L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             subdomains: ['a','b','c']
         }).addTo( map );
-        map.options.center=map.getCenter();
         
         markers = new L.MarkerClusterGroup();
         map.addLayer(markers);
@@ -30,6 +30,7 @@
             publisher:'7389100658200406',
             q:options.what,
             l:options.where,
+            co: options.country,
             start:options.start || '',
             v:'2',
             format:'json',
@@ -41,10 +42,12 @@
         e.preventDefault();
         
         doSearch({
-            what:e.target[0].value,
-            where:e.target[1].value
+            what: e.target[0].value,
+            where: e.target[1].value,
+            country: e.target[2].value
         },function(response){
             data=response;
+            data.country=e.target[2].value;
             displayResults()
         });
     }
@@ -99,10 +102,12 @@
             var options={
                 what: data.query,
                 where: data.location,
+                co: data.country,
                 start: start
             };
             doSearch(options,function(response){
                 data=response;
+                data.country=options.country;
                 displayResults();
             });
         }
@@ -113,10 +118,12 @@
             var options={
                 what: data.query,
                 where: data.location,
+                co: data.country,
                 start: data.end
             };
             doSearch(options,function(response){
                 data=response;
+                data.country=options.country;
                 displayResults();
             });
         }
